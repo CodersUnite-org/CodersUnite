@@ -1,2 +1,2 @@
 $title = "Coders Unite!"
-(ConvertFrom-Markdown -Path ./AboutUs.md).html
+(ConvertFrom-Markdown -Path ./Content/AboutUs.md).html
