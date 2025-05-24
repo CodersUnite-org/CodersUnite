@@ -21,14 +21,14 @@
 title: Coders Unite!
 email: info@codersunite.org
 description: >- # this means to ignore newlines until "baseurl:"
-  At Coders Unite!, we believe that the tech industry thrives when its workers thrive.
-  Yet too often, developers, engineers, and digital creators face systemic exploitation: unpaid overtime ("crunch culture"), wage suppression, surveillance-driven productivity metrics, and the erosion of creative autonomy.
-  We’re building a new kind of collective—part guild, part community, part movement—to fight wage theft, attention theft, and the isolation of modern tech work.
+   At Coders Unite!, we believe that the tech industry thrives when its workers thrive.
+   Yet too often, developers, engineers, and digital creators face systemic exploitation: unpaid overtime ("crunch culture"), wage suppression, surveillance-driven productivity metrics, and the erosion of creative autonomy.
+   We’re building a new kind of collective—part guild, part community, part movement—to fight wage theft, attention theft, and the isolation of modern tech work.
   
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://codersunite.org" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: codersunite
-github_username:  codersunite
+github_username: codersunite
 
 # Build settings
 theme: minima
