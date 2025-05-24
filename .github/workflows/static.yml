@@ -39,11 +39,6 @@ jobs:
       - name: Test MarkDown Files
         shell: pwsh
         run: ./Tests/Test-MarkDown.ps1
-      - name: Build with Jekyll
-        uses: noraworld/jekyll-build-pages@main
-        with:
-          use_ruby_version: false
-          use_gemfile: true
 #      - name: Build Pages
 #        shell: pwsh
 #        run: ./build.ps1
@@ -52,6 +47,6 @@ jobs:
 #        with:
 #          # Upload entire repository
 #          path: ./Web/_site/
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+#      - name: Deploy to GitHub Pages
+#        id: deployment
+#        uses: actions/deploy-pages@v4
