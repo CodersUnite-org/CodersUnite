@@ -1,0 +1,21 @@
+{
+  "LastBuildTime": "2025-05-24T12:58:45.5921646-07:00",
+  "BuildDuration": {
+    "Ticks": 7927284,
+    "Days": 0,
+    "Hours": 0,
+    "Milliseconds": 792,
+    "Microseconds": 728,
+    "Nanoseconds": 400,
+    "Minutes": 0,
+    "Seconds": 0,
+    "TotalDays": 9.175097222222222E-06,
+    "TotalHours": 0.00022020233333333334,
+    "TotalMilliseconds": 792.7284,
+    "TotalMicroseconds": 792728.4,
+    "TotalNanoseconds": 792728400.0,
+    "TotalMinutes": 0.01321214,
+    "TotalSeconds": 0.7927284
+  },
+  "Message": "On Demand"
+}
