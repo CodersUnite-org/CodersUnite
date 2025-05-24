@@ -43,7 +43,7 @@ plugins:
 # their entries' file path in the `include:` list.
 #
 exclude:
-  - jekyll-build-pages
+  - noraworld/jekyll-build-pages
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
