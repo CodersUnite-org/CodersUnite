@@ -1,21 +1,21 @@
 {
-  "LastBuildTime": "2025-05-24T12:58:45.5921646-07:00",
+  "LastBuildTime": "2025-05-24T13:08:21.5174506-07:00",
   "BuildDuration": {
-    "Ticks": 7927284,
+    "Ticks": 1709809,
     "Days": 0,
     "Hours": 0,
-    "Milliseconds": 792,
-    "Microseconds": 728,
-    "Nanoseconds": 400,
+    "Milliseconds": 170,
+    "Microseconds": 980,
+    "Nanoseconds": 900,
     "Minutes": 0,
     "Seconds": 0,
-    "TotalDays": 9.175097222222222E-06,
-    "TotalHours": 0.00022020233333333334,
-    "TotalMilliseconds": 792.7284,
-    "TotalMicroseconds": 792728.4,
-    "TotalNanoseconds": 792728400.0,
-    "TotalMinutes": 0.01321214,
-    "TotalSeconds": 0.7927284
+    "TotalDays": 1.9789456018518517E-06,
+    "TotalHours": 4.749469444444444E-05,
+    "TotalMilliseconds": 170.9809,
+    "TotalMicroseconds": 170980.9,
+    "TotalNanoseconds": 170980900.0,
+    "TotalMinutes": 0.0028496816666666665,
+    "TotalSeconds": 0.1709809
   },
   "Message": "On Demand"
 }
