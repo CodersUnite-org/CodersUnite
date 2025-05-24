@@ -7,10 +7,20 @@ $File
 $permalink = 'pretty'
 $start = [datetime]::Now
 $layoutAtPath = [Ordered]@{}
+$allFiles = @($input)
 
-:nextFile foreach ($file in $input) {
-    $outFile = $file.FullName -replace '\.ps1$'
+$FileNumber = 0
+$TotalFiles = $allFiles.Length
+$progressId = Get-Random
+:nextFile foreach ($file in $allFiles) {
+    $outFile  = $file.FullName -replace '\.ps1$'
     $fileRoot = $file.FullName | Split-Path
+    Write-Progress -Id $progressId -Status "Building Pages" "$($file.Name) " -PercentComplete ((++$FileNumber / $TotalFiles) * 100)
+    # Initialize the page object
+    $Page = [Ordered]@{
+        # anything in MetaData should be rendered as <meta> tags in the <head> section.
+        MetaData = [Ordered]@{}
+    }
     
     # If we don't have a layout for this directory
     if (-not $layoutAtPath[$fileRoot]) {
@@ -32,14 +42,54 @@ $layoutAtPath = [Ordered]@{}
         # all we need to do is set the alias to it.
         Set-Alias layout $layoutAtPath[$fileRoot]
     }
-    
-    $Output = switch ($file.Extension) {
+
+    # We want to support data files for each potential page
+    $dataFilePattern =
+        # They are named the same as the file, but with an additional extension.
+        # The extension is either json, psd1, or yaml.
+        "^$([Regex]::Escape($file.Name))\.(?>json|psd1|ya?ml)$"
+
+    # Find any data files
+    $dataFiles =
+        Get-ChildItem -Path $file.Directory.FullName |
+        Where-Object Name -match $dataFilePattern
+
+    # If we have a data file, we'll use it to set the page configuration.
+    foreach ($dataFile in $dataFiles) {
+        switch ($dataFile.Extension) {
+            '.json' {
+                $pageConfig = Get-Content -Path $dataFile.FullName -Raw | ConvertFrom-Json
+                foreach ($property in $pageConfig.psobject.properties) {
+                    $Page[$property.Name] = $property.Value
+                }
+            }
+            '.psd1' {
+                $pageConfig = Import-LocalizedData -FileName $dataFile.Name -BaseDirectory $file.Directory.FullName                
+                foreach ($property in $pageConfig.GetEnumerator()) {
+                    $Page[$property.Key] = $property.Value
+                }
+            }
+            '.yaml' {
+                $pageConfig = Get-Item $dataFile.FullName | from_yaml
+                foreach ($property in $pageConfig.GetEnumerator()) {
+                    $Page[$property.Key] = $property.Value
+                }
+            }
+        }
+    }    
+
+    $Output = $Content = switch ($file.Extension) {
         # If it's a markdown file, we'll convert it to HTML.
         '.md' {
-            $title = $file.Name -replace '\.md$' -replace 'index'
+            $title = $Page['title'] = $file.Name -replace '\.md$' -replace 'index'
             $outFile = $file.FullName -replace '\.md$', '.html'
-            (ConvertFrom-Markdown -Path $file.FullName).Html |
-                layout
+            $yamlHeader = $file | yaml_header
+            if ($yamlHeader -is [Collections.IDictionary]) {
+                foreach ($keyValue in $yamlHeader.GetEnumerator()) {
+                    $page[$keyValue.Key] = $keyValue.Value
+                }
+            }
+            $file | from_markdown | layout
         }
         # If it's a typescript file, we'll compile it to JS.
         '.ts' {
@@ -54,21 +104,29 @@ $layoutAtPath = [Ordered]@{}
             }
             # Get the script command
             $scriptCmd = Get-Command -Name $file.FullName
-            # If the script requries modules, check if they're loaded.
-            foreach ($requirement in $scriptCmd.ScriptBlock.Ast.ScriptRequirements.RequiredModules) {
-                $alreadyLoaded = Import-Module -Name $requirement.Name -PassThru -ErrorAction Ignore
-                # If they're not already loaded, we'll install them.
-                if (-not $alreadyLoaded) {
-                    Install-Module -AllowClobber -Force -Name $requirement.Name -Scope CurrentUser
-                    $alreadyLoaded = Import-Module -Name $requirement.Name -PassThru -ErrorAction Ignore
-                    Write-Host "Installed $($alreadyLoaded.Name) for $($file.FullName)"
-                } else {
-                    Write-Host "Already loaded $($alreadyLoaded.Name) for $($file.FullName)"
+            # and install any requirements it has.
+            $scriptCmd | RequireModule
+            # Extract the title from the name of the file.
+            $title = $Page['title'] = $file.Name -replace '\..+?\.ps1$' -replace 'index'
+            
+            #region Map File Parameters to Page and Site configuration
+            $FileParameters = [Ordered]@{}
+            :nextParameter foreach ($parameter in $scriptCmd.Parameters.GetEnumerator()) {
+                $potentialType = $parameter.Value.ParameterType
+                foreach ($PotentialName in 
+                    @($parameter.Value.Name;$parameter.Value.Aliases) -ne ''
+                ) {
+                    if ($page[$potentialName] -and $page[$potentialName] -as $potentialType) {
+                        $FileParameters[$potentialName] = $page[$potentialName]
+                        continue nextParameter
+                    }
+                    elseif ($site[$potentialName] -and $site[$potentialName] -as $potentialType) {
+                        $FileParameters[$potentialName] = $site[$potentialName]
+                        continue nextParameter
+                    }
                 }
             }
-            # Extract the title from the name of the file.
-            $title = $file.Name -replace '\..+?\.ps1$' -replace 'index'
-            . $file          
+            . $file @FileParameters
         }
     }
 
@@ -77,13 +135,16 @@ $layoutAtPath = [Ordered]@{}
         continue nextFile # continue to the next file.
     }
 
+    # If we're outputting markdown, and it's not yet HTML
+    if ($outFile -match '\.md$' -and $output -notmatch '<html') {
+        $outputAsMarkdown = @($output) -join [Environment]::NewLine
+        $Output = $outputAsMarkdown | from_markdown | layout
+    }
+
     # If we're outputting to html, let's do a few things:
     if ($outFile -match '\.html?$') {
-        if (
-            $outFile.Name -notmatch 'index\.html?$' -and 
-            $permalink -eq 'pretty'
-        ) {            
-            $outFile = $outFile -replace '\.+?\.html$', '/index.html'            
+        if ($outFile.Name -notmatch 'index\.html?$' -and  $permalink -eq 'pretty') {
+            $outFile = $outFile -replace '\.+?\.html$', '/index.html'
         }
 
         # If the output has outerXML
@@ -97,13 +158,49 @@ $layoutAtPath = [Ordered]@{}
             # we'll use the layout.            
             $output = $output | layout            
         }        
+    }    
+    
+    if ($output -is [Data.DataSet]) {
+        switch -regex ($outFile) {
+            '\.json$' {
+                $jsonObject = [Ordered]@{}
+                foreach ($table in $output.Tables) {
+                    if (-not $table.TableName) { continue }
+                    $jsonObject[$table.TableName] = $table | 
+                        Select-Object -Property $($table.Columns.ColumnName) 
+                }
+                $jsonObject | 
+                    ConvertTo-Json -Depth ($FormatEnumerationLimit * 2) |
+                    Set-Content -Path $outFile
+                
+                if ($?) {
+                    Get-Item -Path $outFile
+                    continue nextFile
+                }
+                
+            }
+            '\.xml$' {
+                $output.WriteXml("$outFile")
+                if ($?) {
+                    Get-Item -Path $outFile
+                    continue nextFile
+                }
+            }
+            '\.xsd$' {
+                $output.WriteXmlSchema("$outFile")
+                if ($?) {
+                    Get-Item -Path $outFile
+                    continue nextFile
+                }
+            }
+        }
     }
 
     # If the output is json, and it's not yet json
     if ($outFile -match '\.json$' -and $output -isnot [string]) {
         # make it json
         $output = $output | ConvertTo-Json -Depth 10
-    }    
+    }
     
     # If the the output is XML,
     if ($output -is [xml]) {
@@ -135,6 +232,7 @@ $layoutAtPath = [Ordered]@{}
     }
 }
 
+Write-Progress -Id $progressId -Completed -Status "Building Pages" "$($file.Name) " 
 # we're done building files.
 $end = [datetime]::Now
 # so let everyone know how long it took.
