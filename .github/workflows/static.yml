@@ -33,6 +33,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Test PowerShell Code
+        shell: pwsh
+        run: ./Tests/Test-PowerShell.ps1
+      - name: Test MarkDown Files
+        shell: pwsh
+        run: ./Tests/Test-MarkDown.ps1
       - name: Build Pages
         shell: pwsh
         run: ./build.ps1
