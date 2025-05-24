@@ -24,6 +24,11 @@ jobs:
         with:
           use_ruby_version: false
           use_gemfile: false
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+# Upload rest of site.
+         path: ./_site/
 
   deploy:
     needs: build
