@@ -22,7 +22,7 @@ title: Coders Unite!
 email: info@codersunite.org
 description: >- # this means to ignore newlines until "baseurl:"
    At Coders Unite!, we believe that the tech industry thrives when its workers thrive.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/Web" # the subpath of your site, e.g. /blog
 url: "https://codersunite.org" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: codersunite!
 github_username: codersunite
