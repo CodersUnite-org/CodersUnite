@@ -1,4 +1,4 @@
-# Monetizing and gathering resources for the cause.
+# Monetization
 
 ## Open collective (Offering Plate)
 *Transparency First*

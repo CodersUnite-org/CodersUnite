@@ -1,4 +1,3 @@
-[About](https://codersunite.org/) | [GuildJobBoard](https://codersunite.org/GuildJobBoard) | [Guild System](https://codersunite.org/GuildSystem)  
 # About Coders Unite!
 **If you're not against us, you're with us!**  
 

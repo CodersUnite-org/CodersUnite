@@ -1,10 +1,10 @@
-# Guild Job Board: No Ghosts, No Games
+# Guild Job Board
 
 We’re dismantling the toxic hiring culture of fake listings and bait-and-switch tactics. Our job board combines community vigilance with hard transparency requirements to protect coders.
 
 ---
 
-## How It Works
+## How It Works: No Ghosts, No Games
 
 ### **Pre-Vetted Listings**  
 Employers **must** provide:  

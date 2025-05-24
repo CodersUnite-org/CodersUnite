@@ -1,4 +1,4 @@
-# The Coders Unite! Guild Hierarchy
+# Guild Hierarchy
 
 We blend traditional craft guild values with modern tech culture to create a merit-based progression system. Earn points, gain recognition, and grow while lifting others up.
 
