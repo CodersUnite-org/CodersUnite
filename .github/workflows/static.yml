@@ -43,7 +43,7 @@ jobs:
         uses: noraworld/jekyll-build-pages@main
         with:
           use_ruby_version: false
-          use_gemfile: false
+          use_gemfile: true
 #      - name: Build Pages
 #        shell: pwsh
 #        run: ./build.ps1
