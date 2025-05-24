@@ -1,3 +1,3 @@
 Set-Location $PSScriptRoot
 $title = "Coders Unite!"
-(ConvertFrom-Markdown -Path .\Content\AboutUs.md).html
+(ConvertFrom-Markdown -Path .\Content\About.md).html
