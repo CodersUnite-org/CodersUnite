@@ -40,6 +40,12 @@ jobs:
       - name: Build Pages
         shell: pwsh
         run: ./build.ps1
+      - name: Test PowerShell
+        shell: pwsh
+        run: ./Tests/Test-PowerShell.ps1
+      - name: Test MarkDown
+        shell: pwsh
+        run: ./Test-MarkDown.ps1
       - name: Upload artifact
         uses: actions/upload-pages-artifact@main
         with:
