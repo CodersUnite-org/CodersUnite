@@ -1,3 +1,5 @@
+| [About Us](About.html) | [GuildJobBoard](GuildJobBoard.html) | [GuildSystem](GuildSystem.html) |
+
 # Monetization
 
 ## Open collective (Offering Plate)

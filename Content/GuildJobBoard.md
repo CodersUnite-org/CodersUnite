@@ -1,3 +1,5 @@
+| [About Us](About.html) | [GuildJobBoard](GuildJobBoard.html) | [GuildSystem](GuildSystem.html) |
+
 # Guild Job Board
 
 We’re dismantling the toxic hiring culture of fake listings and bait-and-switch tactics. Our job board combines community vigilance with hard transparency requirements to protect coders.
