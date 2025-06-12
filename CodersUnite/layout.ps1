@@ -1,7 +1,5 @@
-$paletteName = 'Konsolas'
-$Font = 'Roboto'
+$paletteName = 'Solarized-Darcula'
 $CodeFont = 'Inconsolata'
-
 $argsAndinput = @($args) + @($input)
 
 $style = @"
@@ -19,11 +17,10 @@ pre, code {
 <html>
     <head>
         <title>$Title</title>
+        <!--I agree htmx is nice--!>
+        <script src="https://unpkg.com/htmx.org@latest"></script>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/2bitdesigns/4bitcss@latest/css/$PaletteName.css' id='palette' />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=$Font' id='font' />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=$CodeFont' id='codeFont' />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/styles/default.min.css" id='highlight' />
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/2bitdesigns/4bitcss@latest/css/$PaletteName.css'/>
         $OpenGraph
         $ImportMap
         <style>
