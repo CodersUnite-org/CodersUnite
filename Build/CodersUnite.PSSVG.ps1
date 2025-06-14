@@ -1,4 +1,4 @@
-Install-Module -Name PSSVG
+Install-Module -Name PSSVG -AllowClobber -Force -Scope CurrentUser
 $AssetsPath = $PSScriptRoot | Split-Path | Join-Path -ChildPath "CodersUnite\Assets"
 
 if (-not (Test-Path $AssetsPath)) {
