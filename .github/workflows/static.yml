@@ -35,7 +35,7 @@ jobs:
         uses: actions/configure-pages@main
       - name: Build SVG
         shell: pwsh
-        run: ./CodersUnite.PSSVG.ps1
+        run: ./Build/CodersUnite.PSSVG.ps1
       - name: Build Pages
         shell: pwsh
         run: ./CodersUnite/build.ps1
