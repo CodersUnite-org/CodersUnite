@@ -1,4 +1,4 @@
-| [About Us](About.html) | [GuildJobBoard](/Content/GuildJobBoard.html) | [GuildSystem](/Content/GuildSystem.html) |
+| [About Us](About.html) | [GuildJobBoard](/Content/GuildJobBoard.html) | [GuildSystem](/Content/GuildSystem.html) | [Resources](/Content/Resources.html)
 
 # About Coders Unite!
 **If you're not against us, you're with us!**  

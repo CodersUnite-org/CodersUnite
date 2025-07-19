@@ -1,4 +1,4 @@
-| [About Us](About.html) | [GuildJobBoard](GuildJobBoard.html) | [GuildSystem](GuildSystem.html) |
+| [About Us](About.html) | [GuildJobBoard](GuildJobBoard.html) | [GuildSystem](GuildSystem.html) | [Resources](/Content/Resources.html) |
 
 # Guild Hierarchy
 
