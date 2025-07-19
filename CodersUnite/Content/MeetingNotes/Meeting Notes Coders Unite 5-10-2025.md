@@ -1,0 +1,24 @@
+Why filters?
+- Processes objects by default.
+- Default block is end, filter the default block is process. 
+- Processes all items in the pipeline without having to handle the objects.
+- When you pipe, it checks filters first. 
+- Liquid used inside of Jekkyl and they pipe in input. 
+- Look into PSJekyll
+- Liquid consistency. 
+- ![[Pasted image 20250510120024.png]]
+- [ ] Come up with a build/pipeline
+- [ ] 
+
+- codepen.io
+	- HTML Chunk
+	- CSS Chunk
+	- Javascript Chunk
+- PSMermaid
+- Javascript variables can be done with $
+- Just providing tech tips for end users (recruiting method). 
+	- If we wanted to, we could watch bluesky
+	- Social Content you're sharing as part of the score..
+	- Earn the points by helping people out and posting content.
+	- Use an LLM to read
+	- Proof of concept already
