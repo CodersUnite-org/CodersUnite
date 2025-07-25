@@ -1,5 +1,3 @@
-| [About Us](About.html) | [GuildJobBoard](GuildJobBoard.html) | [GuildSystem](GuildSystem.html) | [Resources](/Content/Resources.html) |
-
 # Resources and Links
 
 - [layoffs.fyi](https://layoffs.fyi) - Tech Layoff Tracker.
