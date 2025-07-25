@@ -49,5 +49,10 @@ $site.Taskbar = [Ordered]@{
     'RSS' = 'https://CodersUnite.org/RSS/index.rss'
 }
 
-$site.HeaderMenu = [Ordered]@{}
+$site.HeaderMenu = [Ordered]@{
+    'About Us' = '/About/'
+    # 'Guild Job Board' = '/Content/JobBoard/'
+    # 'Guild System' = '/Content/GuildSystem/'
+    'Resources' = '/Resources/'
+}
 #endregion Site Menus
